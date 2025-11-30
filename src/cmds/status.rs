@@ -79,6 +79,8 @@ pub fn status() -> Result<()> {
                     let mut cmd = Command::new("ssh");
                     cmd.arg("-i")
                         .arg(&privk)
+                        .arg("-o")
+                        .arg("ConnectTimeout=3")
                         .arg("-p")
                         .arg(h.port.to_string())
                         .arg(format!("{}@{}", h.username, h.host));

@@ -57,6 +57,10 @@ pub struct ExecOpts {
     #[arg(long = "transfer-hidden")]
     /// Transfer hidden files (eg. .env .gitignore)
     hidden: bool,
+
+    #[arg(long = "sync-git")]
+    /// Sync .git folder (default: false, .git is excluded)
+    sync_git: bool,
 }
 
 #[derive(Subcommand, Debug)]
@@ -132,6 +136,7 @@ struct SessionRemote {
     copy_back: Option<String>,
     no_copy_lock: bool,
     hidden: bool,
+    sync_git: bool,
     command: String,
     options: Vec<String>,
 }

@@ -78,6 +78,7 @@ pub fn remote_exec(exec: ExecOpts, cmd: &str, options: Vec<String>) -> anyhow::R
         copy_back: exec.copy_back,
         no_copy_lock: exec.no_copy_lock,
         hidden: exec.hidden,
+        sync_git: exec.sync_git,
         command: cmd.into(),
         options,
     };
@@ -125,6 +126,11 @@ pub fn upsync(s: &SessionRemote) -> Result<()> {
             .arg(".*")
             .arg("--exclude")
             .arg("*/.*");
+    } else if !s.sync_git {
+        // When hidden files are synced but sync_git is false, exclude .git
+        rsync_cmd
+            .arg("--exclude")
+            .arg(".git");
     }
     rsync_cmd
         .arg(format!("{}/", s.project_dir.to_string_lossy()))

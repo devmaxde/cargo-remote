@@ -8,8 +8,10 @@ pub mod show;
 #[derive(Subcommand, Debug)]
 pub enum ConfigCmd {
     #[command(name = "list")]
+    /// List all configurations
     List,
     #[command(name = "show")]
+    /// Prints out a single configuration
     Show {
         #[arg(long = "name")]
         name: Option<String>,
@@ -17,6 +19,7 @@ pub enum ConfigCmd {
         index: Option<usize>,
     },
     #[command(name = "delete")]
+    /// Deletes a configuration
     Delete {
         #[arg(long = "name")]
         name: Option<String>,
@@ -24,5 +27,6 @@ pub enum ConfigCmd {
         index: Option<usize>,
     },
     #[command(name = "edit")]
+    /// Edits a configuration using the default editor
     Edit,
 }
